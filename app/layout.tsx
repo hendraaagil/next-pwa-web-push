@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Demo PWA & Web Push',
+  title: 'Demo PWA',
   description:
     'A demo project showcasing PWA and Web Push capabilities using Next.js.',
 }
