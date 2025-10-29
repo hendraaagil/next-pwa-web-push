@@ -1,3 +1,5 @@
+import PWAProvider from './_components/PWAProvider'
+
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-200 font-sans">
@@ -9,6 +11,7 @@ export default function Home() {
           <p className="max-w-md text-lg leading-8 text-slate-600">Hi there!</p>
         </div>
       </main>
+      <PWAProvider />
     </div>
   )
 }
