@@ -10,6 +10,7 @@ interface BeforeInstallPromptEvent extends Event {
 export default function InstallPrompt() {
   const [isIOS, setIsIOS] = useState(false)
   const [isStandalone, setIsStandalone] = useState(false)
+  const [isInstalled, setIsInstalled] = useState(false)
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null)
 
@@ -20,6 +21,9 @@ export default function InstallPrompt() {
     )
 
     setIsStandalone(window.matchMedia('(display-mode: standalone)').matches)
+
+    // Check if app was previously installed
+    setIsInstalled(localStorage.getItem('app-installed') === 'true')
 
     // Listen for the beforeinstallprompt event (Chrome, Edge, etc.)
     const handleBeforeInstallPrompt = (e: Event) => {
@@ -52,13 +56,14 @@ export default function InstallPrompt() {
     // Track if user accepted the install
     if (outcome === 'accepted') {
       localStorage.setItem('app-installed', 'true')
+      setIsInstalled(true)
     }
 
     // Clear the deferredPrompt
     setDeferredPrompt(null)
   }
 
-  if (isStandalone || localStorage.getItem('app-installed') === 'true') {
+  if (isStandalone || isInstalled) {
     return null // Don't show install button if already installed
   }
 
