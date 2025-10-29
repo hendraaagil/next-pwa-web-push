@@ -49,11 +49,16 @@ export default function InstallPrompt() {
     const { outcome } = await deferredPrompt.userChoice
     console.log(`User response: ${outcome}`)
 
+    // Track if user accepted the install
+    if (outcome === 'accepted') {
+      localStorage.setItem('app-installed', 'true')
+    }
+
     // Clear the deferredPrompt
     setDeferredPrompt(null)
   }
 
-  if (isStandalone) {
+  if (isStandalone || localStorage.getItem('app-installed') === 'true') {
     return null // Don't show install button if already installed
   }
 
