@@ -20,7 +20,7 @@ export default function InstallPrompt() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <h3>Install App</h3>
       <button>Add to Home Screen</button>
       {isIOS && (

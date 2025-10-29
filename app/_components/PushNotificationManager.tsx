@@ -74,22 +74,26 @@ export default function PushNotificationManager() {
     <div>
       <h3>Push Notifications</h3>
       {subscription ? (
-        <>
-          <p>You are subscribed to push notifications.</p>
-          <button onClick={unsubscribeFromPush}>Unsubscribe</button>
-          <input
-            type="text"
-            placeholder="Enter notification message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <button onClick={sendTestNotification}>Send Test</button>
-        </>
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <p>You are subscribed to push notifications.</p>
+            <button onClick={unsubscribeFromPush}>Unsubscribe</button>
+          </div>
+          <div className="flex flex-col gap-2">
+            <input
+              type="text"
+              placeholder="Enter notification message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <button onClick={sendTestNotification}>Send Test</button>
+          </div>
+        </div>
       ) : (
-        <>
+        <div className="flex flex-col gap-2">
           <p>You are not subscribed to push notifications.</p>
           <button onClick={subscribeToPush}>Subscribe</button>
-        </>
+        </div>
       )}
     </div>
   )
