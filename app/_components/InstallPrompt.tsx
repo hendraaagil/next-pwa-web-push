@@ -69,6 +69,8 @@ export default function InstallPrompt() {
 
   const showInstallButton = !!deferredPrompt
   const showIOSInstructions = isIOS && !deferredPrompt
+  const isFirefox = /Firefox/.test(navigator.userAgent)
+  const showFirefoxMessage = isFirefox && !deferredPrompt && !isIOS
 
   return (
     <div className="flex flex-col gap-2">
@@ -95,6 +97,13 @@ export default function InstallPrompt() {
             .
           </p>
         </>
+      )}
+
+      {showFirefoxMessage && (
+        <p className="text-sm">
+          On Firefox Android, tap the menu and select &quot;Install&quot; to add
+          this app to your home screen.
+        </p>
       )}
     </div>
   )
