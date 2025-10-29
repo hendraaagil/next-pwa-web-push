@@ -61,7 +61,7 @@ export default function PushNotificationManager() {
 
   async function sendTestNotification() {
     if (subscription) {
-      await sendNotification(message)
+      await sendNotification(message, '/test-custom-path')
       setMessage('')
     }
   }

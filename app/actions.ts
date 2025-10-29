@@ -33,7 +33,7 @@ export async function unsubscribeUser() {
   return { success: true }
 }
 
-export async function sendNotification(message: string) {
+export async function sendNotification(message: string, url?: string) {
   if (subscriptions.length === 0) {
     throw new Error('No subscriptions available')
   }
@@ -48,6 +48,7 @@ export async function sendNotification(message: string) {
             title: 'Demo PWA Notification',
             body: message,
             icon: '/icon1.png',
+            url: url || '/', // Include the URL in the payload
           }),
         ),
       ),

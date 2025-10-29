@@ -9,6 +9,7 @@ self.addEventListener('push', function (event) {
       data: {
         dateOfArrival: Date.now(),
         primaryKey: '2',
+        url: data.url || '/', // Store the URL to open when clicked
       },
     }
 
@@ -20,5 +21,8 @@ self.addEventListener('push', function (event) {
 self.addEventListener('notificationclick', function (event) {
   console.log('Notification click received.')
   event.notification.close()
-  event.waitUntil(clients.openWindow('https://next-pwa-web-push.vercel.app'))
+
+  // Get the URL from notification data, or use origin as fallback
+  const urlToOpen = event.notification.data.url || self.location.origin
+  event.waitUntil(clients.openWindow(urlToOpen))
 })
