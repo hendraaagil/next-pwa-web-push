@@ -11,6 +11,8 @@ self.addEventListener('push', function (event) {
         primaryKey: '2',
       },
     }
+
+    // ref: https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification
     event.waitUntil(self.registration.showNotification(data.title, options))
   }
 })
