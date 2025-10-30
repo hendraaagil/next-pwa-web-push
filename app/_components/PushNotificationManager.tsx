@@ -64,8 +64,17 @@ export default function PushNotificationManager() {
 
   async function sendTestNotification() {
     if (subscription) {
-      await sendNotification(message, '/test-custom-path')
-      setMessage('')
+      try {
+        const result = await sendNotification(message, '/test-custom-path')
+        if (result.success) {
+          setMessage('')
+        } else {
+          setSubscription(null)
+        }
+      } catch (error) {
+        console.error('Failed to send notification:', error)
+        setSubscription(null)
+      }
     }
   }
 
