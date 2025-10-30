@@ -19,17 +19,24 @@ export async function subscribeUser(sub: PushSubscription) {
   if (!exists) {
     subscriptions.push(webPushSub)
   }
+  console.log('subscribeUser updated', subscriptions)
 
   // In a production environment, you would want to store the subscription in a database
   // For example: await db.subscriptions.create({ data: sub })
   return { success: true }
 }
 
-export async function unsubscribeUser() {
-  // Remove the last subscription (simplified - in production, identify by user ID)
-  subscriptions = []
+export async function unsubscribeUser(sub: PushSubscription) {
+  const webPushSub = sub as unknown as WebPushSubscription
+
+  // Remove the specific subscription by endpoint
+  subscriptions = subscriptions.filter(
+    (s) => s.endpoint !== webPushSub.endpoint,
+  )
+  console.log('unsubscribeUser updated', subscriptions)
+
   // In a production environment, you would want to remove the subscription from the database
-  // For example: await db.subscriptions.delete({ where: { ... } })
+  // For example: await db.subscriptions.delete({ where: { endpoint: webPushSub.endpoint } })
   return { success: true }
 }
 

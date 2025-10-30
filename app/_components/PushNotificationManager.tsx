@@ -54,9 +54,12 @@ export default function PushNotificationManager() {
   }
 
   async function unsubscribeFromPush() {
-    await subscription?.unsubscribe()
+    if (!subscription) return
+
+    await subscription.unsubscribe()
+    const serializedSub = JSON.parse(JSON.stringify(subscription))
+    await unsubscribeUser(serializedSub)
     setSubscription(null)
-    await unsubscribeUser()
   }
 
   async function sendTestNotification() {
